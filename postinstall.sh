@@ -1,5 +1,6 @@
 #!/bin/sh
-
+read -p "hostname? " hostname
+echo $hostname
 read -p "IP/sn? " ip
 echo $ip
 read -p "GW? " gw
@@ -17,11 +18,14 @@ apt upgrade -y
 
 cp /etc/default/grub /etc/default/grub_backup
 sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/' /etc/default/grub
-/usr/sbin/update-grub
+sudo /usr/sbin/update-grub
 
 sed -i 's/inet dhcp/inet static/' /etc/network/interfaces
 echo "   address $ip" >> /etc/network/interfaces
 echo "   gateway $gw" >> /etc/network/interfaces
+
+hostnamectl set-hostname $hostname
+sed -i 's/debian/$hostname/' /etc/hosts
 
 /usr/sbin/runuser -l $user -c "mkdir ~/.ssh && chmod 700 ~/.ssh"
 /usr/sbin/runuser -l $user -c "chmod 700 ~/.ssh"
