@@ -7,11 +7,10 @@
 
 #adduser $user1
 #adduser $user2
-
-echo "IP?"
-read $ip
-echo "Gateway?"
-read $gw
+read -p "IP/sn? " ip
+echo $ip
+read -p "Gateway? " ip
+echo $gw
 
 sudo apt update
 sudo apt install unattended-upgrades curl wget sudo nfs-common gnupg nano -y
