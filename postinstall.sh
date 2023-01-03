@@ -27,6 +27,8 @@ echo "   gateway $gw" >> /etc/network/interfaces
 hostnamectl set-hostname $hostname
 sed -i 's/debian/$hostname/' /etc/hosts
 
+sudo usermod -aG sudo $user
+
 /usr/sbin/runuser -l $user -c "mkdir ~/.ssh && chmod 700 ~/.ssh"
 /usr/sbin/runuser -l $user -c "chmod 700 ~/.ssh"
 /usr/sbin/runuser -l $user -c "echo 'ssh-rsa $key' >> /home/$user/.ssh/authorized_keys"
