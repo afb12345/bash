@@ -1,4 +1,5 @@
 #!/bin/sh
 
-read ip
+read -p "IP " ip
+echo ip
 echo $ip
