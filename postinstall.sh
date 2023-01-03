@@ -30,6 +30,9 @@ sudo sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/' /etc/default/grub
 sudo echo "GRUB_HIDDEN_TIMEOUT_QUIET=true" >> /etc/default/grub
 sudo update-grub
 
-sudo sed -i 's/inet dhcp/inet static/' /etc/network/interfaces
-sudo echo "   address $ip" >> /etc/network/interfaces
-sudo echo "   gateway $gw" >> /etc/network/interfaces
+sudo sed -i 's/inet dhcp/inet static
+   address $ip
+   gateway $gw   
+/' /etc/network/interfaces
+#sudo echo "   address $ip" >> /etc/network/interfaces
+#sudo echo "   gateway $gw" >> /etc/network/interfaces
