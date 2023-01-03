@@ -1,3 +1,5 @@
+#!/bin/sh
+
 echo "label: dos
 label-id: 0x3b59eaa5
 device: /dev/vda
