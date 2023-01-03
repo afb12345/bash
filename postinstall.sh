@@ -13,10 +13,10 @@ read $ip
 echo "Gateway?"
 read $gw
 
-apt update
-apt install unattended-upgrades curl wget sudo nfs-common gnupg nano -y
-dpkg-reconfigure --priority=low unattended-upgrades
-apt upgrade -y
+sudo apt update
+sudo apt install unattended-upgrades curl wget sudo nfs-common gnupg nano -y
+sudo dpkg-reconfigure --priority=low unattended-upgrades
+sudo apt upgrade -y
 
 #usermod -aG sudo $user1
 #usermod -aG sudo $user2
@@ -25,12 +25,12 @@ apt upgrade -y
 
 mkdir ~/.ssh
 chmod 700 ~/.ssh
-cp /etc/ssh/sshd_config /etc/ssh/sshd_config_backup
-cp /etc/default/grub /etc/default/grub_backup
-sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/' /etc/default/grub
-echo "GRUB_HIDDEN_TIMEOUT_QUIET=true" >> /etc/default/grub
-update-grub
+sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config_backup
+sudo cp /etc/default/grub /etc/default/grub_backup
+sudo sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/' /etc/default/grub
+sudo echo "GRUB_HIDDEN_TIMEOUT_QUIET=true" >> /etc/default/grub
+sudo update-grub
 
-sed -i 's/inet dhcp/inet static/' /etc/network/interfaces
-echo "   address $ip" >> /etc/network/interfaces
-echo "   gateway $gw" >> /etc/network/interfaces
+sudo sed -i 's/inet dhcp/inet static/' /etc/network/interfaces
+sudo echo "   address $ip" >> /etc/network/interfaces
+sudo echo "   gateway $gw" >> /etc/network/interfaces
