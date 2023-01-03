@@ -1,5 +1,4 @@
 #!/bin/sh
 
-read $ip $false
+read ip
 echo $ip
-echo $false
