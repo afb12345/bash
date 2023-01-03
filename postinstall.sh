@@ -6,7 +6,9 @@ read -p "GW? " gw
 echo $gw
 read -p "user? " user
 echo $user
-read -p "key? " key
+read -p "ssh port? " port
+echo $port
+read -p "public key? " key
 
 apt update
 apt install unattended-upgrades curl wget sudo nfs-common gnupg nano -y
@@ -25,7 +27,7 @@ echo "   gateway $gw" >> /etc/network/interfaces
 /usr/sbin/runuser -l $user -c "chmod 700 ~/.ssh"
 /usr/sbin/runuser -l $user -c "echo 'ssh-rsa $key' >> /home/$user/.ssh/authorized_keys"
 cp /etc/ssh/sshd_config /etc/ssh/sshd_config_backup
-echo "Port 22222" >> /etc/ssh/sshd_config &&
+echo "Port $port" >> /etc/ssh/sshd_config &&
 echo "AddressFamily inet" >> /etc/ssh/sshd_config &&
 sed -i -n '/PermitRootLogin yes/!p' /etc/ssh/sshd_config &&
 echo "PermitRootLogin no" >> /etc/ssh/sshd_config &&
