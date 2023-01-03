@@ -25,7 +25,7 @@ echo "   address $ip" >> /etc/network/interfaces
 echo "   gateway $gw" >> /etc/network/interfaces
 
 hostnamectl set-hostname $hostname
-sed -i 's/debian/$hostname/' /etc/hosts
+echo "127.0.1.1       $hostname.lan   $hostname" >> /etc/hosts ### <- NOT TESTED YET
 
 sudo usermod -aG sudo $user
 
@@ -40,3 +40,4 @@ echo "PermitRootLogin no" >> /etc/ssh/sshd_config &&
 sed -i -n '/PasswordAuthentication yes/!p' /etc/ssh/sshd_config &&
 echo "PasswordAuthentication no" >> /etc/ssh/sshd_config &&
 systemctl restart sshd
+sudo reboot
