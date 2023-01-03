@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 read -p "IP " ip
 echo ip
