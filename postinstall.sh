@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #echo "Username 1?"
 #read user1
