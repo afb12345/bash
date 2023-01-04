@@ -1,5 +1,8 @@
 #!/bin/sh
 
+fdisk -l -x /dev/vda5
+
+
 echo "label: dos
 label-id: 0x3b59eaa5
 device: /dev/vda
