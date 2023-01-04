@@ -65,9 +65,9 @@ device: /dev/vda
 unit: sectors
 sector-size: 512
 /dev/vda1 : start=        2048, size=      997376, type=83, bootable
-/dev/vda2 : start=     1001470, size=    15773698, type=5
+/dev/vda2 : start=     1001470, size=    7385090, type=5
 /dev/vda3 : start=    $startn, size=    $sizen, type=8e
-/dev/vda5 : start=     1001472, size=    15773696, type=8e" >> partition
+/dev/vda5 : start=     1001472, size=    7385088, type=8e" >> partition
 sudo sfdisk /dev/vda < partition --force
 sudo partx -a /dev/vda3 /dev/vda
 sudo pvcreate /dev/vda3
