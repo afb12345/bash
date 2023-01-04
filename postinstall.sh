@@ -20,16 +20,6 @@ apt install unattended-upgrades curl wget sudo nfs-common gnupg nano -y
 /usr/sbin/dpkg-reconfigure --priority=low unattended-upgrades
 apt upgrade -y
 
-### ASK FOR DISK DETAILS ###
-echo "##############################################################################"
-sudo fdisk -l
-echo "##############################################################################"
-read -p "end of VDA5?    " endp
-read -p "total sectors?    " sectors
-startn=$((endp+1))
-max=$((sectors-1))
-sizen=$((max-endp))
-
 ### QUICK GRUB ###
 cp /etc/default/grub /etc/default/grub_backup
 sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/' /etc/default/grub
@@ -58,6 +48,16 @@ sed -i -n '/PasswordAuthentication yes/!p' /etc/ssh/sshd_config &&
 echo "PasswordAuthentication no" >> /etc/ssh/sshd_config &&
 systemctl restart sshd
 
+### ASK FOR DISK DETAILS ###
+echo "##############################################################################"
+sudo fdisk -l
+echo "##############################################################################"
+read -p "end of VDA5?    " endp
+read -p "total sectors?    " sectors
+startn=$((endp+1))
+max=$((sectors-1))
+sizen=$((max-endp))
+
 ### CREATE NEW LVM ###
 echo "label: dos
 label-id: 0x3b59eaa5
@@ -69,6 +69,7 @@ sector-size: 512
 /dev/vda3 : start=    $startn, size=    $sizen, type=8e
 /dev/vda5 : start=     1001472, size=    7385088, type=8e" >> partition
 sudo sfdisk /dev/vda < partition --force
+rm partition
 sudo partx -a /dev/vda3 /dev/vda
 sudo pvcreate /dev/vda3
 sudo vgextend debian-vg /dev/vda3
