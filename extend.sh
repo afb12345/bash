@@ -2,6 +2,10 @@
 
 fdisk -l -x /dev/vda5
 
+read -p "start VDA5? " start
+read -p "size VDA5? " size
+newsector=$((start+size))
+echo $newsector
 
 echo "label: dos
 label-id: 0x3b59eaa5
