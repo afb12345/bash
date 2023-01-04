@@ -13,6 +13,14 @@ echo $port
 read -p "public key?    " key
 echo "RESIZE DISK NOW"
 read -p "Ready to go?    " nowhere
+
+### UPDATE & DEFAULT PACKAGES ###
+apt update
+apt install unattended-upgrades curl wget sudo nfs-common gnupg nano -y
+/usr/sbin/dpkg-reconfigure --priority=low unattended-upgrades
+apt upgrade -y
+
+### ASK FOR DISK DETAILS ###
 echo "##############################################################################"
 sudo fdisk -l
 echo "##############################################################################"
@@ -21,12 +29,6 @@ read -p "total sectors?    " sectors
 startn=$((endp+1))
 max=$((sectors-1))
 sizen=$((max-endp))
-
-### UPDATE & DEFAULT PACKAGES ###
-apt update
-apt install unattended-upgrades curl wget sudo nfs-common gnupg nano -y
-/usr/sbin/dpkg-reconfigure --priority=low unattended-upgrades
-apt upgrade -y
 
 ### QUICK GRUB ###
 cp /etc/default/grub /etc/default/grub_backup
